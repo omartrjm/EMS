@@ -1,4 +1,9 @@
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using ServerLibrary.Data;
+using ServerLibrary.Helpers;
+
 namespace Server
 {
     public class Program
@@ -13,6 +18,17 @@ namespace Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            //
+            // starting 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
+                    throw new InvalidOperationException("No Connection Found"));
+            }
+            );
+            //
+            builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
 
             var app = builder.Build();
 
