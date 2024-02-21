@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using BaseLibrary.DTOs;
 
 namespace Server.Controllers
 {
