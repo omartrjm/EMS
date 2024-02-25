@@ -32,6 +32,15 @@ namespace Server
             //
             builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
             builder.Services.AddScoped<IUserAccount, UserAccountRepository>();
+            builder.Services.AddCors( options =>
+            {
+                options.AddPolicy("AllowBlazorWasm",
+                    builder => builder
+                    .WithOrigins("http://localhost:5267", "https://localhost:7176")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -42,6 +51,8 @@ namespace Server
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowBlazorWasm");
 
             app.UseAuthorization();
 
