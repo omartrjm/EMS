@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BaseLibrary.DTOs;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {

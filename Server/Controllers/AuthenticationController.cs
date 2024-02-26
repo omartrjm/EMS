@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using ServerLibrary.Repositories.Contracts;
 using BaseLibrary.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticationController(IUserAccount accountInterface) : ControllerBase
     {
         [HttpPost("register")]

@@ -1,10 +1,13 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using ServerLibrary.Data;
 using ServerLibrary.Helpers;
 using ServerLibrary.Repositories.Contracts;
 using ServerLibrary.Repositories.Implementations;
+using System.Text;
 
 namespace Server
 {
@@ -20,8 +23,10 @@ namespace Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            
+
             //
+            builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
+            var jwtSection = builder.Configuration.GetSection(nameof(JwtSection)).Get<JwtSection>();
             // starting 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
@@ -29,8 +34,25 @@ namespace Server
                     throw new InvalidOperationException("No Connection Found"));
             }
             );
+
+            builder.Services.AddAuthentication(options => 
+            { 
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer( options => 
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = jwtSection!.Issuer,
+                    ValidAudience = jwtSection.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection.Key))
+                };
+            });
             //
-            builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
             builder.Services.AddScoped<IUserAccount, UserAccountRepository>();
             builder.Services.AddCors( options =>
             {
@@ -54,6 +76,7 @@ namespace Server
 
             app.UseCors("AllowBlazorWasm");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
