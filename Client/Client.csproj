@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +33,13 @@
 
   <ItemGroup>
     <None Include="Pages\AccountPages\LoginPage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\NewFolder1\" />
+    <Folder Include="Pages\NewFolder2\" />
+    <Folder Include="Pages\OtherPage\" />
+    <Folder Include="Pages\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,6 @@ namespace ClientLibrary.Helpers
     {
         public static string SerializeObj<T>(T modelObject) => JsonSerializer.Serialize(modelObject);
         public static T DeserializeJsonString<T>(string jsonString) => JsonSerializer.Deserialize<T>(jsonString);
-        public IList<T> DeserializeJsonStringList<T>(string jsonString) => JsonSerializer.Deserialize<IList> ;
+        public static IList<T> DeserializeJsonStringList<T>(string jsonString) => JsonSerializer.Deserialize<IList<T>>(jsonString);
     }
 }
