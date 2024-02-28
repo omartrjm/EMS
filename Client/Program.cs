@@ -5,6 +5,8 @@ using ClientLibrary.Services.Implementations;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Syncfusion.Blazor;
+using Syncfusion.Blazor.Popups;
 
 namespace Client
 {
@@ -28,6 +30,10 @@ namespace Client
             builder.Services.AddScoped<LocalStorageService>();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+
+			builder.Services.AddSyncfusionBlazor();
+			builder.Services.AddScoped<SfDialogService>();
+
             await builder.Build().RunAsync();
         }
     }
