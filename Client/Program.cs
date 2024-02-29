@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Client.ApplicationStates;
 using ClientLibrary.Helpers;
 using ClientLibrary.Services.Contracts;
 using ClientLibrary.Services.Implementations;
@@ -31,6 +32,7 @@ namespace Client
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 
+            builder.Services.AddScoped<DepartmentState>();
 			builder.Services.AddSyncfusionBlazor();
 			builder.Services.AddScoped<SfDialogService>();
 
