@@ -26,7 +26,7 @@ namespace ServerLibrary.Repositories.Implementations
 
         public async Task<GeneralResponse> Insert(Branch item)
         {
-            if (!await CheckName(item.Name!)) return new GeneralResponse(false, "Department already added");
+            if (!await CheckName(item.Name!)) return new GeneralResponse(false, "Branch already added");
             appDbContext.Branches.Add(item);
             await Commit();
             return Success();
@@ -41,7 +41,7 @@ namespace ServerLibrary.Repositories.Implementations
             return Success();
         }
 
-        private static GeneralResponse NotFound() => new(false, "Sorry department not found");
+        private static GeneralResponse NotFound() => new(false, "Sorry branch not found");
         private static GeneralResponse Success() => new(true, "Process completed");
         private async Task Commit() => await appDbContext.SaveChangesAsync();
         private async Task<bool> CheckName(string name)

@@ -7,7 +7,7 @@ using ServerLibrary.Repositories.Contracts;
 
 namespace ServerLibrary.Repositories.Implementations
 {
-    internal class GeneralDepartmentRepository(AppDbContext appDbContext) : IGenericRepositoryInterface<GeneralDepartment>
+    public class GeneralDepartmentRepository(AppDbContext appDbContext) : IGenericRepositoryInterface<GeneralDepartment>
     {
         public async Task<GeneralResponse> DeleteById(int id)
         {
