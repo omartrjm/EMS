@@ -1,0 +1,191 @@
+﻿@implements IDisposable
+@if (allState.ShowEmployee)
+{
+    if (ShowAddOrUpdateEmployee)
+    {
+        <div class="container">
+
+            <div class="row mt-5">
+                <div class="col-lg-1 text-center">
+                    <i class="bi bi-x-lg fs-3 fw-bold text-danger" style="cursor:pointer"@onclick"Closeform"></i></div>
+                <div class="col-lg-6 text-center"><h2>Add Employee</h2></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lf-12 mt-2 mb-5 d-flex justify-content-center">
+                    <div class="hstack">
+
+                        @if (FirstLayer)
+                        {
+                            <div class="@FloatingNumber1 text-center">1</div>
+                            <div class="@Floatingdiv1 text-center"></div>
+                            <div class="@FloatingNumber2 text-center">2</div>
+                            <div class="@Floatingdiv2 text-center">1</div>
+                        }
+                        @if (SecondLayer)
+                        {
+                            <div class="@FloatingNumber1 text-center">1</div>
+                            <div class="@Floatingdiv1 text-center"></div>
+                            <div class="@FloatingNumber2 text-center">2</div>
+                            <div class="@Floatingdiv2 text-center">1</div>
+                        }
+                    </div>
+                </div>
+
+                @* //Employee form  //first //second layers *@
+                <div class="col-lg-12">
+                    <div class="container-fluid">
+                        @if (FirstLayer)
+                        { 
+                            <EditForm Enhance Model="EmployeeGroup1" OnValidSubmit="Form1">
+                                <DataAnnotationsValidator/>
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4">
+                                        <div class="card-title mb-5 fw-bold" style="font-family:Tahoma">Personal Information</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="form-label">FullName</label>
+                                                <InputText @bind-Value"EmployeeGroup1.Name" class="form-control"/>
+                                                <ValidationMessage For="()=> EmployeeGroup1.Name" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <label class="form-label">Telephone</label>
+                                                <InputText @bind-Value"EmployeeGroup1.TelephoneNumber" class="form-control"/>
+                                                <ValidationMessage For="()=> EmployeeGroup1.TelephoneNumber" class="text-danger" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Address</label>
+                                                <InputText @bind-Value"EmployeeGroup1.Address" class="form-control"/>
+                                                <ValidationMessage For="()=> EmployeeGroup1.Address" class="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mt-2">
+                                        <div class="card-title mb-5 fw-bold" style="font-family:Tahoma">Other Information</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="form-label">Civil Id</label>
+                                                <InputText @bind-Value="EmployeeGroup1.CivilId" class="form-control"/>
+                                                <ValidationMessage For="()=>EmployeeGroup1.CivilId" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <label class="form-label">File Number</label>
+                                                <InputText @bind-Value="EmployeeGroup1.FileNumber" class="form-control" />
+                                                <ValidationMessage For="()=>EmployeeGroup1.FileNumber" class="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                            </EditForm>
+                        }
+                        @if (SecondLayer)
+                        { 
+                            @* Employee Group 2 *@
+                            <EditForm Enhance Model="EmployeeGroup2" OnValidSubmit="Form2">
+                                <DataAnnotationsValidator/>
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4">
+                                        <div class="card-title mb-5 fw-bold" style="font-family:Tahoma">Job Information</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="form-label">Job Name</label>
+                                                <InputText @bind-Value"EmployeeGroup1.JobName" class="form-control"/>
+                                                <ValidationMessage For="()=> EmployeeGroup1.JobName" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label"> </label>
+                                                <label class="form-label"> @GeneralDepartmenName == "" ? "Select General Department" : $ </label>
+                                                <SfDropDownList TValue="string" TItem="GeneralDepartment" Placeholder="Select General Department">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="GeneralDepartment" ValueChange="OnGeneralDepartmentValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label"> @DepartmenName == "" ? "Select  Department" : $"Selected Department:{}" </label>
+                                                <SfDropDownList TValue="string" TItem="Department" Placeholder="Select Department" DataSource="Department">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="Department" ValueChange="OnDepartmentValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label"> @Employee.Branch == null ? "Select Branch" : $"Selected Branch:{Employee.Branch.Name}" </label>
+                                                <SfDropDownList TValue="string" TItem="Branch" Placeholder="Select Town" DataSource="Branches">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="Branch" ValueChange="OnBranchValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                                <ValidationMessage For="()=>EmployeeGroup2.BranchId" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-4 mb-5">
+                                                <button class="btn btn-primary float-start type="button" @onclick="PrevClicked">
+                                                    <i class="bi bi-arrow-left"></i> Prev
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card-title mb-5 fw-bold" style="font-family:Tahoma">Loaction Information</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="form-label"> </label>
+                                                <label class="form-label"> @CountryName == "" ? "Select Country":$"Selected Country: {CountryName}" </label>
+                                                <SfDropDownList TValue="string" TItem="Country" Placeholder="Country" DataSource="Countries">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="Country" ValueChange="OnCountryValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label"> </label>
+                                                <label class="form-label"> @CityName == "" ? "Select City" : $"Selected City: {CityName}" </label>
+                                                <SfDropDownList TValue="string" TItem="GeneralDepartment" Placeholder="Select City" DataSource="Cities">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="City" ValueChange="OnCityValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label"> @Employee.Town == "" ? "Select Town":$"Selected Town: {Employee.Town.Name}" </label>
+                                                <SfDropDownList TValue="string" TItem="Town" Placeholder="Select Town" DataSource="Towns">
+                                                    <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
+                                                    <DropDownListEvents TValue="string" TItem="Town" ValueChange="OnTownValueChange"></DropDownListEvents>
+                                                </SfDropDownList>
+                                                    <ValidationMessage For="()=>EmployeeGroup2.TownId" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label">Other</label>
+                                                <textarea @bind="EmployeeGroup2.Other" placeholder="Optional" class="form-control"/>
+                                            </div>
+                                            <div class="form-group mt-4 mb-5">
+                                                <button class="btn btn-primary float-start type="button" @onclick="PrevClicked">
+                                                    <i class="bi bi-arrow-left"></i> Prev
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mt-2">
+                                        <div class="card-title mb-5 fw-bold" style="font-family:Tahoma">Other Information</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="form-label">Civil Id</label>
+                                                <InputText @bind-Value="EmployeeGroup1.CivilId" class="form-control"/>
+                                                <ValidationMessage For="()=>EmployeeGroup1.CivilId" class="text-danger"/>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <label class="form-label">File Number</label>
+                                                <InputText @bind-Value="EmployeeGroup1.FileNumber" class="form-control" />
+                                                <ValidationMessage For="()=>EmployeeGroup1.FileNumber" class="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                            </EditForm>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
