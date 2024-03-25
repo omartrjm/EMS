@@ -120,7 +120,7 @@
                                                     string department = Department.Equals("") ? "Select Department" : Department;
                                                 }
                                                 <label class="form-label">Select Department</label>
-                                                <SfDropDownList TValue="string" TItem="Department" Placeholder="Select Department" DataSource="Department">
+                                                <SfDropDownList TValue="string" TItem="Department" Placeholder="@department" DataSource="Department">
                                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                                     <DropDownListEvents TValue="string" TItem="Department" ValueChange="OnDepartmentValueChange"></DropDownListEvents>
                                                 </SfDropDownList>
@@ -130,7 +130,7 @@
                                                     string branch = Branch.Equals("") ? "Select Branch" : Branch;
                                                 }
                                                 <label class="form-label">Select Branch</label>
-                                                <SfDropDownList TValue="string" TItem="Branch" Placeholder="Select Branch" DataSource="Branches">
+                                                <SfDropDownList TValue="string" TItem="Branch" Placeholder="@branch" DataSource="Branches">
                                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                                     <DropDownListEvents TValue="string" TItem="Branch" ValueChange="OnBranchValueChange"></DropDownListEvents>
                                                 </SfDropDownList>
@@ -151,7 +151,7 @@
                                                 @{
                                                     string country = Country.Equals("") ? "Select Country" : Country;
                                                 }
-                                                <SfDropDownList TValue="string" TItem="Country" Placeholder="Country" DataSource="Countries">
+                                                <SfDropDownList TValue="string" TItem="Country" Placeholder="@country" DataSource="Countries">
                                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                                     <DropDownListEvents TValue="string" TItem="Country" ValueChange="OnCountryValueChange"></DropDownListEvents>
                                                 </SfDropDownList>
@@ -161,7 +161,7 @@
                                                 @{
                                                     string city = City.Equals("") ? "Select City" : City;
                                                 }
-                                                <SfDropDownList TValue="string" TItem="GeneralDepartment" Placeholder="Select City" DataSource="Cities">
+                                                <SfDropDownList TValue="string" TItem="GeneralDepartment" Placeholder="@city" DataSource="Cities">
                                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                                     <DropDownListEvents TValue="string" TItem="City" ValueChange="OnCityValueChange"></DropDownListEvents>
                                                 </SfDropDownList>
@@ -171,7 +171,7 @@
                                                 @{
                                                     string town = Town.Equals("") ? "Select Town" : Town;
                                                 }
-                                                <SfDropDownList TValue="string" TItem="Town" Placeholder="Select Town" DataSource="Towns">
+                                                <SfDropDownList TValue="string" TItem="Town" Placeholder="@town" DataSource="Towns">
                                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                                     <DropDownListEvents TValue="string" TItem="Town" ValueChange="OnTownValueChange"></DropDownListEvents>
                                                 </SfDropDownList>
