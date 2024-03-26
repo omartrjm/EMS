@@ -53,5 +53,6 @@ namespace ServerLibrary.Repositories.Implementations
         private static GeneralResponse NotFound() => new(false,"Sorry data not found");
         private static GeneralResponse Success() => new(true,"Process completed");
 
+
     }
 }

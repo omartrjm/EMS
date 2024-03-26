@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BaseLibrary.Entities
 {
-    public class OvertimeType
+    public class OvertimeType : BaseEntity
     {
 		// Many to one relationship with Overtime
 		[JsonIgnore]

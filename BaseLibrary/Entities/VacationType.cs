@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BaseLibrary.Entities
 {
-    public class VacationType
+    public class VacationType : BaseEntity
     {
 		// many to one
 		[JsonIgnore]

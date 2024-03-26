@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BaseLibrary.Entities
 {
-    public class SanctionType
+    public class SanctionType : BaseEntity
     {
 		// many to one relationship
 		[JsonIgnore]
