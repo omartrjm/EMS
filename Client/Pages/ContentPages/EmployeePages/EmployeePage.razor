@@ -288,7 +288,10 @@
 
 
 
-
+    // Sanction clicked
+    SanctionDialog? sanctionDialog;
+    Sanction sanction = new();
+    List<SanctionType> SanctionTypes = [];
     private void AddSanctionClicked()
     {
         Sanction.EmployeeId = SelectedEmployee.Id;
