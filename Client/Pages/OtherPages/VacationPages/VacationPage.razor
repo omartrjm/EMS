@@ -1,40 +1,40 @@
 ﻿@implements IDisposable
-@if (allState.ShowOvertime)
+@if (allState.ShowVacation)
 {
     <div class="continer mt-5">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card border-danger shadow-lg">
+                <div class="card shadow-lg border-info">
                     <div class="card-header">
-                        <h4 class="float-start">Manage Employees Overtime</h4>
+                        <h4 class="float-start">Manage Employees's Vacations</h4>
                     </div>
                     <div class="card-header" style="max-height:580px; overflow-x:hidden; overflow-y:scroll;">
                         <div class="card-body">
                             @{
                                 var Tool = (new List<string>() { "Search", "ExcelExport", "PdfExport", "Print" });
                             }
-                             <SfGrid DataSource="@Overtimes" AllowPaging="true" AllowSorting="true" Toolbar="@Tool" AllowExcelExport="true" AllowPdfExport="true" @ref="DefaultGrid">
+                            <SfGrid DataSource="@Vacations" AllowPaging="true" AllowSorting="true" Toolbar="@Tool" AllowExcelExport="true" AllowPdfExport="true" @ref="DefaultGrid">
                                 <GridPageSettings PageSize="5">
-                                <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="Overtime"></GridEvents>
-                                <GridColumns>
-                                    <GridColumn Field=@nameof(Vacation.EmployeeId) HeaderText="ID"></GridColumn>
-                                    <GridColumn HeaderText="Type">
-                                        <Template>
-                                            @{
-                                                var item = (context as Overtime);
+                                    <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="Vacation"></GridEvents>
+                                    <GridColumns>
+                                        <GridColumn Field=@nameof(Vacation.EmployeeId) HeaderText="ID"></GridColumn>
+                                        <GridColumn HeaderText="Type">
+                                            <Template>
+                                                @{
+                                                var item = (context as Vacation);
                                                 <div>
-                                                    @item!.OvertimeType!.Name
+                                                    @item!.VacationType!.Name
                                                 </div>
                                             }
                                         </Template>
                                     </GridColumn>
-                                    <GridColumn Field=@nameof(Overtime.StartDate) HeaderText="Start Date"></GridColumn>
-                                    <GridColumn Field=@nameof(Overtime.EndDate) HeaderText="End Date"></GridColumn>
-                                    <GridColumn Field=@nameof(Overtime.NumberOfDays) HeaderText="Number of days"></GridColumn>
+                                    <GridColumn Field=@nameof(Vacation.StartDate) HeaderText="Start Date"></GridColumn>
+                                    <GridColumn Field=@nameof(Vacation.EndDate) HeaderText="End Date"></GridColumn>
+                                    <GridColumn Field=@nameof(Vacation.NumberOfDays) HeaderText="Number of days"></GridColumn>
                                     <GridColumn HeaderText="Action">
                                         <Template>
                                             @{
-                                                var employee = (context as Overtime);
+                                                var employee = (context as Vacation);
                                                 <div>
                                                     <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="()=>EditClicked(employee!)"></i>
                                                     <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="()=>DeleteClicked(employee!)"></i>
@@ -43,67 +43,67 @@
                                         </Template>
                                     </GridColumn>
                                 </GridColumns>
-                                </GridPageSettings>
-                             </SfGrid>
-                        </div>
+                            </GridPageSettings>
+                        </SfGrid>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+</div>
 }
 
 
-<OvertimeDialog @ref="overtimeDialog"
+<VacationDialog @ref="vacationDialog"
                 ItemModel="ItemModel"
-                OvertimeTypes="OvertimeTypes"
+                VacationTypes="VacationTypes"
                 HandleSaveOperationEvent="HandleSaveOperationEvent" />
 @code {
-    private SfGrid<Overtime>? DefaultGrid;
-    OvertimeDialog? overtimeDialog;
-    Overtime ItemModel = new();
-    public List<Overtime> Overtimes { get; set; } = new();
-    public List<OvertimeType> OvertimeTypes { get; set; } = new();
+    private SfGrid<Vacation>? DefaultGrid;
+    VacationDialog? vacationDialog;
+    Vacation ItemModel = new();
+    public List<Vacation> Vacations { get; set; } = new();
+    public List<VacationType> VacationTypes { get; set; } = new();
 
     protected async override Task OnInitializedAsync()
     {
         await GetTypes();
-        await GetOvertime();
+        await GetVacations();
         allState.Action += StateHasChanged;
     }
 
-    private async Task GetTypes() => OvertimeTypes = await overtimeTypeService.GetAll(Constants.OvertimeTypeBaseUrl);
-    private async Task GetOvertime() => Overtimes = await overtimeTypeService.GetAll(Constants.OvertimeBaseUrl);
+    private async Task GetTypes() => VacationTypes = await vacationTypeService.GetAll(Constants.VacationTypeBaseUrl);
+    private async Task GetVacations() => Vacations = await vacationService.GetAll(Constants.VacationBaseUrl);
 
-    void OpenDialog() => overtimeDialog ? OpenDialog();
+    void OpenDialog() => vacationDialog?.OpenDialog();
 
-    private async Task HandleSaveOperationEvent(Overtime item)
+    private async Task HandleSaveOperationEvent(Vacation item)
     {
-        var result = await overtimeService.Update(item, Constants.OvertimeBaseUrl);
+        var result = await vacationService.Update(item, Constants.VacationBaseUrl);
         bool successCheck = await DisplayMessage(result.Flag, result.Message);
         if (successCheck)
         {
             ItemModel = new();
-            await GetOvertime();
+            await GetVacations();
         }
     }
 
-    private void EditClicked(Overtime item)
+    private void EditClicked(Vacation item)
     {
         ItemModel = item;
         OpenDialog();
     }
 
-    private async Task DeleteClicked(Overtime item)
+    private async Task DeleteClicked(Vacation item)
     {
-        bool confirm = await dialogService.ConfirmAsync($"You sure you want to delete it?","Confirm Delete");
+        bool confirm = await dialogService.ConfirmAsync($"You sure you want to delete it?", "Confirm Delete");
         if (!confirm) return;
 
-        var response = await overtimeService.DeleteById(item.EmployeeId, Constants.OvertimeBaseUrl);
+        var response = await vacationService.DeleteById(item.EmployeeId, Constants.VacationBaseUrl);
         var result = await DisplayMessage(response.Flag, response.Message);
 
-        if (result) 
-            await GetOvertime();
+        if (result)
+            await GetVacations();
     }
 
     private async Task<bool> DisplayMessage(bool flag, string message)

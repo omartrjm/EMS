@@ -73,8 +73,4 @@
     <UpToDateCheckInput Remove="Pages\ContentPages\EmployeePages\AddOrUpdateEmployeePage.razor" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\OtherPages\VacationPages\" />
-  </ItemGroup>
-
 </Project>

@@ -1,14 +1,16 @@
-﻿@if (allState.ShowOvertimeType)
-{ 
+﻿@implements IDisposable
+@if (allState.ShowVacationType)
+{
     <div class="continer mt-5">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="float-start">Overtime Types</h4>
+                        <h4 class="float-start">Vacation Types</h4>
                         <button class="btn btn-outline-success float-end"
-                            @onclick="OpenDialog">
-                            <i class="bi bi-plus-circle-dotted"></i> Add Type</button>
+                                @onclick="OpenDialog">
+                            <i class="bi bi-plus-circle-dotted"></i> Add Type
+                        </button>
                     </div>
                     <div class="card-header" style="max-height:580px; overflow-x:hidden; overflow-y:scroll">
                         <div class="card-body">
@@ -33,8 +35,8 @@
                                                 <td>@item.Name</td>
                                                 <td>
                                                     <i class="bi bi-penci text-info"
-                                                    id="cursorStyle"@onclick="()=>EditClicked(item)"></i>
-                                                    
+                                                       id="cursorStyle" @onclick="()=>EditClicked(item)"></i>
+
                                                     <i class="bi bi-trash text-danger"
                                                        id="cursorStyle" @onclick="()=>DeleteClicked(item)"></i>
                                                 </td>
@@ -44,9 +46,9 @@
                                     }
                                     else
                                     {
-                                       <tr>
-                                           <td colspan="4"><div class="alert alert-info text-center">No Type added yet</div></td>
-                                       </tr>     
+                                        <tr>
+                                            <td colspan="4"><div class="alert alert-info text-center">No Type added yet</div></td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -58,22 +60,24 @@
     </div>
 }
 
+
+
+<SanctionTypeDialog @ref="vacationTypeDialog"
+                    HandleSaveOperationEvent="HandleSaveOperationEvent"
+                    VacationType="VacationType" />
+
 <style>
-    .cursorStyle{
-        cursor:pointer;
+    .cursorStyle {
+        cursor: pointer;
     }
 </style>
 
-<OvertimeTypeDialog @ref="overtimeTypeDialog"
-                    HandleSaveOperationEvent="HandleSaveOperationEvent"
-                    OvertimeType="OvertimeType" />
-
 
 @code {
-    OvertimeTypeDialog? overtimeTypeDialog;
-    OvertimeType OvertimeType = new();
+    VacationTypeDialog? vacationTypeDialog;
+    VacationType VacationType = new();
     public string Title { get; set; } = "Add";
-    public List<OvertimeType> Types { get; set; } = new();
+    public List<VacationType> Types { get; set; } = new();
 
     protected async override Task OnInitializedAsync()
     {
@@ -81,47 +85,47 @@
         allState.Action += StateHasChanged;
     }
 
-    private async Task GetTypes() => Types = await overtimeTypeService.GetAll(Constants.OvertimeTypeBaseUrl);
+    private async Task GetTypes() => Types = await vacationTypeService.GetAll(Constants.VacationTypeBaseUrl);
 
-    void OpenDialog() => overtimeTypeDialog?.OpenDialog();
+    void OpenDialog() => vacationTypeDialog?.OpenDialog();
 
 
     //
-    private async Task HandleSaveOperationEvent(OvertimeType item)
+    private async Task HandleSaveOperationEvent(VacationType item)
     {
         bool successCheck = false;
         if (item.Id > 0)
         {
-            var result = await overtimeTypeService.Update(item, Constants.OvertimeTypeBaseUrl);
+            var result = await vacationTypeService.Update(item, Constants.VacationTypeBaseUrl);
             successCheck = await DisplayMessage(result.Flag, result.Message);
         }
         else
         {
-            var response = await overtimeTypeService.Insert(item, Constants.OvertimeTypeBaseUrl);
+            var response = await vacationTypeService.Insert(item, Constants.VacationTypeBaseUrl);
             successCheck = await DisplayMessage(response.Flag, response.Message);
         }
         if (successCheck)
         {
-            OvertimeType = new();
+            VacationType = new();
             await GetTypes();
-            overtimeTypeDialog?.ChangeTitle("Add");
+            vacationTypeDialog?.ChangeTitle("Add");
         }
     }
 
     //
-    private void EditClicked(OvertimeType item)
+    private void EditClicked(VacationType item)
     {
-        overtimeTypeDialog?.ChangeTitle("Update");
-        OvertimeType = item;
+        vacationTypeDialog?.ChangeTitle("Update");
+        VacationType = item;
         OpenDialog();
     }
 
-    private async Task DeleteClicked(OvertimeType item)
+    private async Task DeleteClicked(VacationType item)
     {
-        bool confirm = await dialogService.ConfirmAsync($"You sure you want to delete {item.Name}?","Confirm Delete");
+        bool confirm = await dialogService.ConfirmAsync($"You sure you want to delete {item.Name}?", "Confirm Delete");
         if (!confirm) return;
 
-        var response = await overtimeTypeService.DeleteById(item.Id, Constants.OvertimeTypeBaseUrl);
+        var response = await vacationTypeService.DeleteById(item.Id, Constants.VacationTypeBaseUrl);
         if (await DisplayMessage(response.Flag, response.Message))
             await GetTypes();
     }
@@ -142,7 +146,7 @@
 
     public void Dispose()
     {
-        allState.Action -= StateHasChanged;    
+        allState.Action -= StateHasChanged;
     }
 
 
