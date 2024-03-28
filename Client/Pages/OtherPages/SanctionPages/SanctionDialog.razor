@@ -2,32 +2,32 @@
     <DialogEvents OnOpen="OpenDialog"></DialogEvents> 
     <DialogTemplates></DialogTemplates>
     <DialogTemplates>
-        <Header>@Title Employee's Vacation</Header>
+        <Header>@Title Employee's Sanction</Header>
         <Content>
             <EditForm Model="ItemModel" Enhance OnSubmit="Save">
                 <div class="card border-success">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Employee ID</label>
-                            <input @bind-Value="ItemModel.EmployeeId" class="form-control" disabled/>
+                            <input @bind="ItemModel.EmployeeId" class="form-control" disabled/>
                         </div>
                         <div class="form-group mt-2">
-                            <label class="form-label">Start Date</label>
-                            <InputDate @bind-Value="ItemModel.StartDate" class="form-control"/>
+                            <label class="form-label">Ocurring Date</label>
+                            <InputDate @bind-Value="ItemModel.Date" class="form-control"/>
                         </div>
                         <div class="form-group mt-2">
-                            <label class="form-label">Number of days</label>
-                            <InputNumber @bind-Value="ItemModel.NumberOfDays" class="form-control"/>
+                            <label class="form-label">Punishment Date</label>
+                            <InputDate @bind-Value="ItemModel.PunishmentDate" class="form-control"/>
                         </div>
                         <div class="form-group mt-2">
-                            <label class="form-label">End Date</label>
-                            <input @bind-Value="ItemModel.EndDate.Date" class="form-control" disabled />
+                            <label class="form-label">Punishment</label>
+                            <InputTextArea @bind-Value="ItemModel.Punishment" class="form-control" disabled />
                         </div>
                         <div class="form-group mt-3 mb-3">
                             <label class="form-label">Select Type</label>
-                            @if (ColumnMenuItemModel.SanctionType != null)
+                            @if (ItemModel.SanctionType != null)
                             {
-                                string selected = ColumnMenuItemModel.SanctionType!.Name!;
+                                string selected = ItemModel.SanctionType!.Name!;
                                 <SfDropDownList TValue="string" TItem="SanctionType" Placeholder="@selected" DataSource="SanctionTypes">
                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                     <DropDownListEvents TValue="string" TItem="SanctionType" ValueChange="OnValueChange"></DropDownListEvents>

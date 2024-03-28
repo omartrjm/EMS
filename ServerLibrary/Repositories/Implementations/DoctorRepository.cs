@@ -15,7 +15,7 @@ namespace ServerLibrary.Repositories.Implementations
 {
     public class DoctorRepository(AppDbContext appDbContext) : IGenericRepositoryInterface<Doctor>
     {
-        public async Task<GeneralDepartment> DeleteById(int id)
+        public async Task<GeneralResponse> DeleteById(int id)
         {
             var item = await appDbContext.Doctors.FirstOrDefaultAsync(eid => eid.EmployeeId == id);
             if (item is null) return NotFound();

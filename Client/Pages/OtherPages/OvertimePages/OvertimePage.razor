@@ -73,9 +73,9 @@
     }
 
     private async Task GetTypes() => OvertimeTypes = await overtimeTypeService.GetAll(Constants.OvertimeTypeBaseUrl);
-    private async Task GetOvertime() => Overtimes = await overtimeTypeService.GetAll(Constants.OvertimeBaseUrl);
+    private async Task GetOvertime() => Overtimes = await overtimeService.GetAll(Constants.OvertimeBaseUrl);
 
-    void OpenDialog() => overtimeDialog ? OpenDialog();
+    void OpenDialog() => overtimeDialog?.OpenDialog();
 
     private async Task HandleSaveOperationEvent(Overtime item)
     {

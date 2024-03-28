@@ -62,7 +62,7 @@
 
 
 
-<SanctionTypeDialog @ref="sanctioneTypeDialog"
+<SanctionTypeDialog @ref="sanctionTypeDialog"
                     HandleSaveOperationEvent="HandleSaveOperationEvent"
                     SanctionType="SanctionType" />
 
@@ -87,7 +87,7 @@
 
     private async Task GetTypes() => Types = await sanctionTypeService.GetAll(Constants.SanctionTypeBaseUrl);
 
-    void OpenDialog() => overtimeTypeDialog?.OpenDialog();
+    void OpenDialog() => sanctionTypeDialog?.OpenDialog();
 
 
     //

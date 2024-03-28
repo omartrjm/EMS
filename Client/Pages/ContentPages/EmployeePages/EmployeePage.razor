@@ -301,9 +301,6 @@
     }
 
 
-
-
-
     // Sanction clicked
     SanctionDialog? sanctionDialog;
     Sanction Sanction = new();
@@ -370,7 +367,7 @@
             await this.DefaultGrid!.ExcelExport()!;
 
         if (args.Item.Text == "PDF Export")
-            await this.DefaultGrid!.PdfExport()!;//end
+            await this.DefaultGrid!.PdfExport()!;
     }
 
     private async Task<bool> DisplayMessage(bool flag, string message)

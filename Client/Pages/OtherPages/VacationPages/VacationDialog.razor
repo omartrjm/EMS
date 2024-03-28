@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Employee ID</label>
-                            <input @bind-Value="ItemModel.EmployeeId" class="form-control" disabled/>
+                            <input @bind="ItemModel.EmployeeId" class="form-control" disabled/>
                         </div>
                         <div class="form-group mt-2">
                             <label class="form-label">Start Date</label>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group mt-2">
                             <label class="form-label">End Date</label>
-                            <input @bind-Value="ItemModel.EndDate.Date" class="form-control" disabled />
+                            <input value="@ItemModel.EndDate.Date" class="form-control" disabled />
                         </div>
                         <div class="form-group mt-3 mb-3">
                             <label class="form-label">Select Type</label>

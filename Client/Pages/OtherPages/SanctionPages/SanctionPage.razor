@@ -12,7 +12,7 @@
                         <div class="card-body">
                             @{
                                 var Tool = (new List<string>() { "Search", "ExcelExport", "PdfExport", "Print" });
-                            }
+                        }
                             <SfGrid DataSource="@Sanctions" AllowPaging="true" AllowSorting="true" Toolbar="@Tool" AllowExcelExport="true" AllowPdfExport="true" @ref="DefaultGrid">
                                 <GridPageSettings PageSize="5">
                                     <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="Sanction"></GridEvents>
@@ -59,8 +59,9 @@
                 SanctionTypes="SanctionTypes"
                 HandleSaveOperationEvent="HandleSaveOperationEvent" />
 @code {
-    private SfGrid<Overtime>? DefaultGrid;
+    private SfGrid<Sanction>? DefaultGrid;
     SanctionDialog? sanctionDialog;
+
     Sanction ItemModel = new();
     public List<Sanction> Sanctions { get; set; } = new();
     public List<SanctionType> SanctionTypes { get; set; } = new();
@@ -73,9 +74,9 @@
     }
 
     private async Task GetTypes() => SanctionTypes = await sanctionTypeService.GetAll(Constants.SanctionTypeBaseUrl);
-    private async Task GetSanctions() => Sanctions = await sanctionTypeService.GetAll(Constants.SanctionBaseUrl);
+    private async Task GetSanctions() => Sanctions = await sanctionService.GetAll(Constants.SanctionBaseUrl);
 
-    void OpenDialog() => sanctionsDialog?.OpenDialog();
+    void OpenDialog() => sanctionDialog?.OpenDialog();
 
     private async Task HandleSaveOperationEvent(Sanction item)
     {
