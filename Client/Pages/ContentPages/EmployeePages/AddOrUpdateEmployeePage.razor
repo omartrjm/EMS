@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Address</label>
-                                                <InputText @bind-Value = "EmployeeGroup1.Address" class="form-control"/>
+                                                <InputTextArea @bind-Value = "EmployeeGroup1.Address" class="form-control"/>
                                                 <ValidationMessage For="()=> EmployeeGroup1.Address" class="text-danger" />
                                             </div>
                                             <div class="form-control mt-2">
@@ -245,6 +245,17 @@
 </style>
 
 @code{
+
+    string FloatingNumber1 = "floatingNumber";
+    string Floatingdiv1 = "floattingDiv";
+
+    string FloatingNumber2 = "inactive-span";
+    string Floatingdiv2 = "inactive-div";
+
+    public bool FirstLayer { get; set;} = true;
+    public bool SecondLayer { get; set;} = false;
+
+
     public string Title { get; set; } = "Add";
     public string GeneralDepartment { get; set; } = "";
     public string Department { get; set; } = "";
@@ -269,14 +280,7 @@
     [Parameter] public List<Department> Departments {get; set;} = new();
     [Parameter] public List<Branch> Branches {get; set;} = new();
 
-    string FloatingNumber1 = "floatingNumber";
-    string Floatingdiv1 = "floattingDiv";
 
-    string FloatingNumber2 = "inactive-span";
-    string Floatingdiv2 = "inactive-div";
-
-    public bool FirstLayer { get; set;} = true;
-    public bool SecondLayer { get; set;} = false;
 
     private void ShowLayer2()
     {

@@ -54,6 +54,7 @@
     }
 }
 
+<AddOrUpdateEmployeePage ShowAddOrUpdateEmployee="ShowAddOrUpdatePage"></AddOrUpdateEmployeePage>
 <AddOrUpdateEmployeePage @ref="addOrUpdateEmployee"
                          Employee="Employee"
                          ShowAddOrUpdateEmployee="ShowAddOrUpdatePage">
@@ -278,7 +279,7 @@
     // overtime
     OvertimeDialog? overtimeDialog;
     Overtime Overtime = new();
-    List<OvertimeType> overtimeTypes = [];
+    List<OvertimeType> OvertimeTypes = [];
     private void AddOvertimeClicked()
     {
         Overtime.EmployeeId = SelectedEmployee.Id;
