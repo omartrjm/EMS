@@ -24,14 +24,14 @@
 								string selected = City.Country!.Name;
 								<SfDropDownList TValue="string" TItem="Country" Placeholder="@selected" DataSource="Countries">
 									<DropDownListFieldSettings value="Id" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="Country" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="Country" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 							else
 							{
 								<SfDropDownList TValue="string" TItem="Country" Placeholder="Select Country" DataSource="Countries">
 									<DropDownListFieldSettings value="Id" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="Country" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="Country" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 						</div>
@@ -71,7 +71,7 @@
     {
         Title = title;
     }
-    public void OnValueChange(ChangeEventArgs<string, City> args)
+    public void OnValueChange(ChangeEventArgs<string, Country> args)
     {
         City.CountryId = int.Parse(args.Value);    
     }

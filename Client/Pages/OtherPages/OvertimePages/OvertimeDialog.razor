@@ -30,14 +30,14 @@
                                 string selected = ItemModel.OvertimeType!.Name!;
                                 <SfDropDownList TValue="string" TItem="OvertimeType" Placeholder="@selected" DataSource="OvertimeTypes">
                                     <DropDownListFieldSettings Value="Id"Text="Name"></DropDownListFieldSettings>
-                                    <DropDownListEvents TValue="string" TItem="OvertimeType" ValueChange="OnValueChange()"></DropDownListEvents>
+                                    <DropDownListEvents TValue="string" TItem="OvertimeType" ValueChange="OnValueChange"></DropDownListEvents>
                                 </SfDropDownList>
                             }
                             else
                             {
                                 <SfDropDownList TValue="string" TItem="OvertimeType" Placeholder="Select Type" DataSource="OvertimeTypes">
                                     <DropDownListFieldSettings Value="Id"Text="Name"></DropDownListFieldSettings>
-                                    <DropDownListEvents TValue="string" TItem="OvertimeType" ValueChange="OnValueChange()"></DropDownListEvents>
+                                    <DropDownListEvents TValue="string" TItem="OvertimeType" ValueChange="OnValueChange"></DropDownListEvents>
                                 </SfDropDownList>
                             }
                         </div>

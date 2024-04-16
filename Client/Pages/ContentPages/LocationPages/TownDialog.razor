@@ -5,7 +5,7 @@
 	<DialogTemplates>
 		<Header> @Title Town </Header>
 		<Content>
-			<EditForm Model="City" Enhance OnSubmit="Save">
+			<EditForm Model="Town" Enhance OnSubmit="Save">
 				<div class="card border-success">
 					<div class="card-body">
 						<div class="form-group">
@@ -24,14 +24,14 @@
 								string selected = Town.City!.Name;
 								<SfDropDownList TValue="string" TItem="City" Placeholder="@selected" DataSource="Cities">
 									<DropDownListFieldSettings value="Id" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="City" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="City" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 							else
 							{
 							<SfDropDownList TValue="string" TItem="City" Placeholder="Select City" DataSource="Cities">
 									<DropDownListFieldSettings value="Id" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="City" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="City" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 						</div>
@@ -47,7 +47,7 @@
 
 @code {
     [Parameter] public Town Town { get; set; } = new();
-    [Parameter] public List<City> cities { get; set; } = new();
+    [Parameter] public List<City> Cities { get; set; } = new();
     [Parameter] public EventCallback<Town> HandleSaveOperationEvent { get; set; }
     private bool IsVisible { get; set; } = false;
     public string Title { get; set; } = "Add";

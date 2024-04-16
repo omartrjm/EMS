@@ -1,5 +1,5 @@
 ﻿@implements IDisposable
-@if (allState.showHealth)
+@if (allState.ShowHealth)
 {
     <div class="continer mt-5">
         <div class="row">
@@ -9,8 +9,8 @@
                     <div class="card-header" style="max-height:580px; overflow:hidden; overflow-y:scroll;">
                         <div class="card-body">
                             @{
-                                var Tool =(new List<string>() {"Search","ExcelExport","PdfExport","Print"})
-                             }
+                                var Tool = (new List<string>() { "Search", "ExcelExport", "PdfExport", "Print" });
+                            }
                              <SfGrid DataSource="@Doctors" AllowPaging="true" AllowSorting="true" Toolbar=@Tool AllowExcelExport="true" AllowPdfExport="true" @ref="DefaultGrid">
                                 <GridPageSettings PageSize="5"></GridPageSettings>
                                 <GridEvents OnToolbarClick="ToolbarClickHandler" TValue="Doctor"></GridEvents>

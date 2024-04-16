@@ -24,14 +24,14 @@
 								string selected = ManageUser!.Role!;
 								<SfDropDownList TValue="string" TItem="SystemRole" Placeholder="@selected" DataSource="SystemRoles">
 									<DropDownListFieldSettings value="Name" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="SystemRole" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="SystemRole" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 							else
 							{
 							<SfDropDownList TValue="string" TItem="SystemRole" Placeholder="Select Role" DataSource="SystemRoles">
 									<DropDownListFieldSettings value="Name" Text="Name"></DropDownListFieldSettings>
-									<DropDownListEvents TVlaue="string" TItem="SystemRole" ValueChange="OnValueChange"></DropDownListEvents>
+									<DropDownListEvents TValue="string" TItem="SystemRole" ValueChange="OnValueChange"></DropDownListEvents>
 								</SfDropDownList>
 							}
 						</div>
@@ -46,26 +46,32 @@
 </SfDialog>
 
 @code {
-    [Parameter] public ManageUser ManageUser { get; set; } = new();
-    [Parameter] public List<SystemRole> SystemRoles { get; set; } = new();
-    [Parameter] public EventCallback<ManageUser> HandleSaveOperationEvent { get; set; }
-    
-    private bool IsVisible { get; set; } = false;
+	[Parameter] public ManageUser ManageUser { get; set; } = new();
+	[Parameter] public List<SystemRole> SystemRoles { get; set; } = new();
+	[Parameter] public EventCallback<ManageUser> HandleSaveOperationEvent { get; set; }
 
-    private async void Save()
-    {
-        if (string.IsNullOrEmpty(ManageUser.Name) || string.IsNullOrEmpty(ManageUser.Role))
-            await dialogService.AlertAsync("You need to provide Role name.", "Alert!");
+	private bool IsVisible { get; set; } = false;
+	public string Title { get; set; } = "Add";
 
-        else
-            await HandleSaveOperationEvent.InvokeAsync(ManageUser);
-    }
+	private async void Save()
+	{
+		if (string.IsNullOrEmpty(ManageUser.Name) || string.IsNullOrEmpty(ManageUser.Role))
+			await dialogService.AlertAsync("You need to provide Role name.", "Alert!");
 
-    public void OpenDialog()
-    {
-        IsVisible = true;
-        StateHasChanged();
-    }
+		else
+			await HandleSaveOperationEvent.InvokeAsync(ManageUser);
+	}
+
+	public void OpenDialog()
+	{
+		IsVisible = true;
+		StateHasChanged();
+	}
+
+	public void ChangeTitle(string title)
+	{
+		Title = title;	
+	}
 
     public void OnValueChange(ChangeEventArgs<string, SystemRole> args)
     {

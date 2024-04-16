@@ -35,7 +35,7 @@
                             }
                             else
                             {
-                            <SfDropDownList TValue="string" TItem="VacationType" Placeholder="Select Type" DataSource="SanctionTypes">
+                                <SfDropDownList TValue="string" TItem="VacationType" Placeholder="Select Type" DataSource="VacationTypes">
                                     <DropDownListFieldSettings Value="Id" Text="Name"></DropDownListFieldSettings>
                                 <DropDownListEvents TValue="string" TItem="VacationType" ValueChange="OnValueChange"></DropDownListEvents>
                                 </SfDropDownList>
@@ -55,7 +55,7 @@
 </SfDialog>
 @code {
     [Parameter] public Vacation ItemModel { get; set; } = new();
-    [Parameter] public List<VacationType> VacationType { get; set; } = new();
+    [Parameter] public List<VacationType> VacationTypes { get; set; } = new();
     [Parameter] public EventCallback<Vacation> HandleSaveOperationEvent { get; set; }
     public string Title { get; set; } = "Add";
     private bool IsVisible { get; set; } = false;
