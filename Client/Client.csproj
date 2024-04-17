@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\ContentPages\DepartmentPages\DepartmentDialog.razor" />
-    <Content Remove="Pages\ContentPages\EmployeePages\AddOrUpdateEmployeePage.razor" />
+    <Content Remove="Pages\ContentPages\DepartmentPages\DepartmentPage.razor" />
     <Content Remove="Pages\LoginPage.razor" />
   </ItemGroup>
 
@@ -55,14 +55,14 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\ContentPages\DepartmentPages\DepartmentDialog.razor" />
-    <_ContentIncludedByDefault Remove="Pages\ContentPages\EmployeePages\AddOrUpdateEmployeePage.razor" />
+    <_ContentIncludedByDefault Remove="Pages\ContentPages\DepartmentPages\DepartmentPage.razor" />
     <_ContentIncludedByDefault Remove="Pages\LoginPage.razor" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Pages\AccountPages\LoginPage.razor" />
     <None Include="Pages\ContentPages\DepartmentPages\DepartmentDialog.razor" />
-    <None Include="Pages\ContentPages\EmployeePages\AddOrUpdateEmployeePage.razor" />
+    <None Include="Pages\ContentPages\DepartmentPages\DepartmentPage.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\ContentPages\EmployeePages\AddOrUpdateEmployeePage.razor" />
+    <UpToDateCheckInput Remove="Pages\ContentPages\DepartmentPages\DepartmentPage.razor" />
   </ItemGroup>
 
 </Project>
