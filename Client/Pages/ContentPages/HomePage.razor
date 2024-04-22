@@ -2,7 +2,7 @@
 
 <TableBanner/>
 <GeneralDepartmentPage/>
-@* <DepartmentPage/> *@
+<DepartmentPage/>
 <BranchPage/>
 <CountryPage/>
 <CityPage/>
@@ -29,6 +29,6 @@
 		var user = (await AuthenticationState).User;
 		bool isUserAuthenticated = user.Identity!.IsAuthenticated;
 		if (!isUserAuthenticated)
-			NavManager.NavigateTo("/identity/account/login");
+		NavManager.NavigateTo("/identity/account/login");
 	}
 }
